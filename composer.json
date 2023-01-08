@@ -3,6 +3,16 @@
   "type": "library",
   "license": "MIT",
   "description": "Webman plugin roiwk/webman-sail",
+  "keywords": [
+    "webman", "plugin", "sail", "webman-sail", "docker compose", "docker"
+  ],
+  "authors": [
+    {
+        "name": "roiwk",
+        "email": "vip@roiwk.cn"
+    }
+  ],
+  "minimum-stability": "stable",
   "require": {
     "symfony/process": "^5.0|^6.0",
     "symfony/console": "^5.0|^6.0"

@@ -1,6 +1,6 @@
 # 简介
 
-Webman Sail 是一个轻量级的命令行界面，用于与 Webman 的默认 Docker 开发环境进行交互。Sail 为使用 PHP，MySQL 和 Redis 构建 Webman 应用程序提供了一个很好的起点，而无需事先具有 Docker 经验。
+Webman Sail 是一个轻量级的命令行界面，用于 Webman 与 Docker 开发环境进行交互。Sail 为使用 PHP，MySQL 和 Redis 构建 Webman 应用程序提供了一个很好的起点，而无需事先具有 Docker 经验。
 
 Sail 的核心是 docker-compose.yml 文件和存储在项目根目录的 sail 脚本。sail 脚本为 CLI 提供了便捷的方法，可用于与 docker-compose.yml 文件定义的 Docker 容器进行交互。
 
@@ -57,11 +57,11 @@ DB_ROOT_PASSWORD=password
 ./vendor/bin/sail down
 ./vendor/bin/sail ps
 ```
-3. sail === php-cli(container)  链接有容器内部php指令。
+3. sail === php-cli(container)  链接容器内部php指令。
 ```shell
 ./vendor/bin/sail php test.php
 ```
-4. sail === composer(container) 链接容器内部compoer指令。
+4. sail === composer(container) 链接容器内部composer指令。
 ```shell
 ./vendor/bin/sail composer update
 ./vendor/bin/sail composer require foo/bar

@@ -20,13 +20,17 @@ composer require roiwk/webman-sail --dev
 ```shell
 php webman sail:install
 ```
+或者直接指定需要安装的服务：  
+```shell
+php webman sail:install --with=mysql,redis
+```
 
 3. 启动服务。
 
 ```shell
 ./vendor/bin/sail up
 ```
-
+访问： ```http://localhost``` 即可。
 至此，基本的环境安装已经就绪，下来是配置和使用相关的文档：
 
 ## 环境变量
@@ -60,6 +64,7 @@ DB_ROOT_PASSWORD=password
 3. sail === php-cli(container)  链接容器内部php指令。
 ```shell
 ./vendor/bin/sail php test.php
+./vendor/bin/sail php -v
 ```
 4. sail === composer(container) 链接容器内部composer指令。
 ```shell
@@ -67,11 +72,11 @@ DB_ROOT_PASSWORD=password
 ./vendor/bin/sail composer require foo/bar
 ./vendor/bin/sail composer remove foo/bar
 ```
-5. sail === mysql-cli  链接容器内部mysql/mariadb/psql指令。
+5. sail === mysql-cli  链接mysql/mariadb/psql容器内部指令。
 ```shell
 ./vendor/bin/sail mysql
 ```
-6. sail === redis-cli  链接容器内部redis指令。
+6. sail === redis-cli  链接redis容器内部指令。
 ```shell
 ./vendor/bin/sail redis
 ```

@@ -25,7 +25,7 @@ class PublishCommand extends Command
     {
         $helper = $this->getHelper('question');
         $question = new Question(
-            '<comment>This step will force overwrite existing files(in "/docker/php" path), are you sure to execute?</comment> [Y/N]',
+            '<comment>This step will force overwrite existing "/docker/php" path(delete & re-publish to the path), are you sure to execute?</comment> [Y/N] (Default:Y)  ',
             'Y',
         );
         $answer = $helper->ask($input, $output, $question);

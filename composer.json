@@ -14,6 +14,7 @@
   ],
   "minimum-stability": "stable",
   "require": {
+    "webman/console": "^1.2",
     "symfony/process": "^5.0|^6.0",
     "symfony/console": "^5.0|^6.0"
   },

@@ -6,7 +6,7 @@ FROM php:"${PHP_CLI_VERSION}-cli-alpine"
 
 RUN if [ $CONTAINER_PACKAGE_URL ] ; then sed -i "s/dl-cdn.alpinelinux.org/${CONTAINER_PACKAGE_URL}/g" /etc/apk/repositories ; fi
 
-RUN apk add --no-cache supervisor unzip
+RUN apk add --no-cache supervisor unzip shadow su-exec
 
 COPY --from=php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 RUN chmod uga+x /usr/local/bin/install-php-extensions
@@ -38,12 +38,14 @@ COPY php.ini "$PHP_INI_DIR/conf.d/99-sail.ini"
 
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN apk --no-cache add shadow && usermod -u 1000 www-data && groupmod -g 1000 www-data
-
-EXPOSE 8787
+ARG WWWGROUP
+RUN groupadd --force -g $WWWGROUP sail && useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 sail
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+COPY start-container /usr/local/bin/start-container
+RUN chmod +x /usr/local/bin/start-container
 
 WORKDIR /www
+EXPOSE 8787
+
+ENTRYPOINT ["start-container"]

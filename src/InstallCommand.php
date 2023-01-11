@@ -32,7 +32,8 @@ class InstallCommand extends Command
         $this->setName('sail:install')
             ->setDescription('Install Webman Sail\'s default Docker Compose file.')
             ->setHelp('This Command Helps you to install default Docker Compose file.')
-            ->addOption('with', 'w', InputOption::VALUE_REQUIRED, 'Which services would you like to install?', null);
+            ->addOption('with', 'w', InputOption::VALUE_REQUIRED, 'The services that should be included in the installation.', null)
+            ->addOption('devcontainer', 'devc', InputOption::VALUE_REQUIRED, 'Create a .devcontainer configuration directory.', null);
     }
 
     /**
@@ -62,6 +63,10 @@ class InstallCommand extends Command
         $this->buildDockerCompose($services);
         $this->replaceEnvVariables($services);
         $this->configurePhpUnit();
+
+        if ($input->getOption('devcontainer')) {
+            $this->installDevContainer();
+        }
 
         $output->writeln("<info>Sail scaffolding installed successfully.</info>");
 
@@ -195,6 +200,30 @@ class InstallCommand extends Command
         if ($status === 0) {
             $output->writeln('<info>Sail build successful.</info>');
         }
+    }
+
+    /**
+     * Install the devcontainer.json configuration file.
+     *
+     * @return void
+     */
+    protected function installDevContainer()
+    {
+        if (! is_dir(base_path('.devcontainer'))) {
+            mkdir(base_path('.devcontainer'), 0755, true);
+        }
+
+        file_put_contents(
+            base_path('.devcontainer/devcontainer.json'),
+            file_get_contents(__DIR__.'/../stubs/devcontainer.stub')
+        );
+
+        $environment = file_get_contents(base_path('.env'));
+
+        $environment .= "\nWWWGROUP=1000";
+        $environment .= "\nWWWUSER=1000\n";
+
+        file_put_contents(base_path('.env'), $environment);
     }
 
     /**

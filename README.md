@@ -109,6 +109,19 @@ DB_ROOT_PASSWORD=password
 ./vendor/bin/sail build --no-cache
 ```
 
+## 高级用法
+1. 使用开发容器 [DevContainer](https://code.visualstudio.com/docs/remote/containers)
+```shell
+./vendor/bin/sail install --devcontainer
+```
+
+2. 配置别名
+默认情况下，Sail 命令使用 vendor/bin/sail 脚本调用,但与其重复的输入 vendor/bin/sail 来执行 Sail 命令，你可能会希望配置一个 Bash 别名方便你更容易的执行 Sail 命令
+```shell
+alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
+```
+> 补充：通过 vim ~/.bashrc 或 vim ~/.zshrc 加入别名，可以让别名常驻。
+
 ## 贡献
 
 欢迎提交PR

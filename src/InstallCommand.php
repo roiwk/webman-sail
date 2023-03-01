@@ -162,6 +162,10 @@ class InstallCommand extends Command
      */
     protected function configurePhpUnit()
     {
+        if (! file_exists(base_path('phpunit.xml')) && ! file_exists(base_path('phpunit.xml.dist'))) {
+            return;
+        }
+
         if (! file_exists($path = base_path('phpunit.xml'))) {
             $path = base_path('phpunit.xml.dist');
         }

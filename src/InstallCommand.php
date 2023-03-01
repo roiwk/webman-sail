@@ -63,7 +63,13 @@ class InstallCommand extends Command
         $this->buildDockerCompose($services);
 
         if (! file_exists(base_path('.env'))) {
-            file_put_contents(base_path('.env'), '');
+            file_put_contents(base_path('.env'), <<<ENV
+DB_PORT=3306
+DB_DATABASE=test
+DB_USERNAME=dev
+DB_PASSWORD=123456
+DB_ROOT_PASSWORD=password
+ENV);
             $output->writeln('  <bg=yellow;fg=black> WARN </> .env file not exist, and the file was created by the command.'.PHP_EOL);
         }
         $this->replaceEnvVariables($services);

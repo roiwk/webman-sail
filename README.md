@@ -6,6 +6,12 @@ Sail 的核心是 docker-compose.yml 文件和存储在项目根目录的 sail �
 
 Webman Sail 支持 macOS、Linux 和 Windows (通过 [WSL2](https://docs.microsoft.com/en-us/windows/wsl/about)）。
 
+## 置顶
+0. 解决"先有鸡,还是先有蛋"问题.   无需系统有php环境,直接建立webman项目(通过docker):
+```shell
+curl -s "https://www.roiwk.cn/build-webman-app" | bash
+```
+  这将在当前目录下建立一个'example-app'的文件夹, 默认环境为php8.1, mysql,reids的webman项目
 
 ## 安装 & 启动
 
